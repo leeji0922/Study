@@ -95,7 +95,7 @@ public class UserService{
 		return findMemberById(userId).getRole(); // 유저의 Role 값을 리턴
 	}
 	
-	
+	//
 	
 	
 //	//유저의 Role 값을 세팅

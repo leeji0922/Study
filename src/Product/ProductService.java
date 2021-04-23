@@ -90,4 +90,40 @@ public class ProductService extends UserService{
 		System.out.println("유저가 없습니다");
 	}
 	
+	//상품 삭제
+	public void deletProduct(String userId,String productName) {
+		try {
+			if(isPermissions(userId) != Role.ADMIN) { // 유저의 권한을 확인한 후 어드민이 아닐 경우
+				throw new NotPermissions("권한이 없습니다.");
+			}
+			if(findProduct(productName) == null) { // 상품 데이터에 상품이 없을 경우
+				throw new NotParameter("해당 상품이 없습니다.");
+			}
+			proList.remove(findProduct(productName)); // 상품 이름을 가진 상품 데이터 삭제
+			System.out.println("삭제가 완료 되었습니다.");
+			
+		} catch(Exception e) {
+				e.getStackTrace();
+			}
+	}
+	
+	//상품 수정
+	public void editProdcut(String userId, Product product) {
+		try {
+			
+			if(isPermissions(userId) != Role.ADMIN) { // 유저의 권한을 확인한 후 어드민이 아닐 경우
+				throw new NotPermissions("권한이 없습니다.");
+			}
+			if(findProduct(product.getProductName()) == null) { // 상품 데이터에 상품이 없을 경우
+				throw new NotParameter("해당 상품이 없습니다.");
+			}
+			proList.remove(findProduct(product.getProductName()));// 상품 이름을 가진 상품 데이터 삭제
+			proList.add(new Product(product.getProductName(),product.getCost(),product.getStock())); // 상품 추가
+			System.out.println("수정이 완료 되었습니다.");
+			
+		} catch(Exception e) {
+			e.getStackTrace();
+		}
+	}
+	
 }

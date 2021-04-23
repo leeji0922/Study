@@ -69,6 +69,20 @@ public class MainTest {
 		pro.printAllBuyList("leeji0922");
 		pro.printAllBuyList("leeji3922");
 		pro.printAllBuyList("park1234");
+		
+		//상품 수정 테스트
+		System.out.println("=========================상품 수정 테스트============================");
+		pro.editProdcut("kim3922",new Product("과자2",2999,4));
+		pro.findProduct("과자2");
+		pro.editProdcut("leeji0922", new Product("과자2",50000,5));
+		pro.findProduct("과자2");
+		
+		//상품 삭제 테스트
+		System.out.println("=========================상품 삭제 테스트============================");
+		pro.deletProduct("kim3922", "과자2");
+		pro.findProduct("과자2");
+		pro.deletProduct("leeji0922", "과자2");
+		pro.findProduct("과자2");
 	}
 
 }
