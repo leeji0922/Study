@@ -33,6 +33,7 @@ public class ProductService extends UserService implements Prohibited{
 				System.out.println("금지어 : " + checkProductName(product.getProductName()) + " (이)가 있으므로 등록이 안됩니다.");
 				return;
 			}
+			System.out.println("***시도 : " + userId + " (이)가 " + product.getProductName() + "을 " + "상품 등록을 시도");
 			proList.add(new Product(product.getProductName(),product.getCost(),product.getStock()));
 			System.out.println("등록완료");
 		} catch (Exception e) {

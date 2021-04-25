@@ -105,7 +105,8 @@ public class MainTest {
 		pro.findProduct("애플충전기");
 		pro.addProduct("leeji0922", new Product("삼성케이스",40000,100));
 		pro.findProduct("삼성케이스");
-		
+		pro.addProduct("leeji0922", new Product("샤오미케이스",40000,100));
+		pro.findProduct("샤오미케이스");
 	}
 
 }
