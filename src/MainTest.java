@@ -28,7 +28,7 @@ public class MainTest {
 		pro.registerMember(new User("leeji0922","2222","김유진","여성","23","강서","011", Role.USER));
 		pro.printAllMember();
 		System.out.println("변경 테스트");
-		pro.editMember("leeji0922","1234","이재익","남성","25","목4동","010", Role.ADMIN);
+		pro.editMember(new User("leeji0922","1234","이재익","남성","25","목4동","010", Role.ADMIN));
 		pro.printAllMember();
 		
 		// 탈퇴 테스트
@@ -83,6 +83,12 @@ public class MainTest {
 		pro.findProduct("과자2");
 		pro.deletProduct("leeji0922", "과자2");
 		pro.findProduct("과자2");
+		
+		
+		//권한 수정 테스트
+		System.out.println("=========================권한 수정 테스트============================");
+		pro.setUserPermissions("leeji0922", "kim3922", Role.GUEST);
+		pro.printAllMember();
 	}
 
 }

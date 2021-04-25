@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Exception.IsDupliUser;
+import Exception.NotPermissions;
 import Exception.NotUser;
 import Role.Role;
 
 public class UserService{
 	
 	List<User> userList = new ArrayList<>();
+	User user = new User();
 	
 	// 회원가입
 	public void registerMember(User user) {
@@ -46,16 +48,16 @@ public class UserService{
 //	}
 	
 	// 회원정보수정
-	public void editMember(String userId, String userPw, String userName, String sex, String age, String address, String tel,Role role) {
+	public void editMember(User user) {
 		try {
-			if(findMemberById(userId) == null) { // 입력한 유저입력값을 찾아서 목록에 없을 경우
+			if(findMemberById(user.getUserId()) == null) { // 입력한 유저입력값을 찾아서 목록에 없을 경우
 				throw new NotUser("없는 회원입니다.");
 			}
 //			if(!findMemberById(userId).equals(userId)) {
 //				throw new NotUser("아이디를 바꿀 순 없습니다.");	
 //			}
-			userList.remove(findMemberById(userId)); // 입력한 유저입력값을 삭제
-			userList.add(new User(userId,userPw,userName,sex,age,address,tel,role)); // 해당 정보를 새로 등록
+			userList.remove(findMemberById(user.getUserId())); // 입력한 유저입력값을 삭제
+			userList.add(user); // 해당 정보를 새로 등록
 			System.out.println("수정 완료");
 				
 			//System.out.println(userList);
@@ -95,7 +97,48 @@ public class UserService{
 		return findMemberById(userId).getRole(); // 유저의 Role 값을 리턴
 	}
 	
-	//
+	//유저의 권한 세팅
+	public void setUserPermissions(String setuserId, String userId, Role role) {
+		try {
+			if(isPermissions(setuserId) != Role.ADMIN) {
+				throw new NotPermissions("권한이 없습니다.");
+			}
+			if(isPermissions(userId) == role) {
+				System.out.println("이미" + role +" 입니다.");
+			}
+			if(findMemberById(userId) == null) {
+				throw new NotUser("없는 회원입니다.");
+			}
+			userList.remove(findMemberById(userId));
+			userList.add(new User(userId,findMemberById(userId).getUserPw(),findMemberById(userId).getUserName(),findMemberById(userId).getSex(),findMemberById(userId).getAge(),findMemberById(userId).getAddress(),findMemberById(userId).getTel(),role));
+			System.out.println("권한이 설정 되었습니다.");
+			
+		} catch(Exception e) {
+			e.getStackTrace();
+		}
+		
+	}
+	
+	//유저의 권한 값 세팅
+	public Role editPermissions(String userId, String setUserId, Role role) {
+		try {
+			if(isPermissions(userId) != Role.ADMIN) {
+				throw new NotPermissions("권한이 없습니다.");
+			}
+			if(isPermissions(setUserId) == Role.ADMIN) {
+				System.out.println("어드민의 권한을 변경할 수 없습니다.");
+			}
+			
+		} catch(Exception e) {
+			e.getStackTrace();
+		}
+		
+		
+		return role;
+		
+	}
+	
+	
 	
 	
 //	//유저의 Role 값을 세팅

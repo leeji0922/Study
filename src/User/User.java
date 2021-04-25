@@ -85,6 +85,9 @@ public class User {
 	public User(User userInfo, String setRole) {
 		super();
 	}
+	public User() {
+		
+	}
 	@Override
 	public String toString() {
 		return "User [userId=" + userId + ", userPw=" + userPw + ", userName=" + userName + ", sex=" + sex + ", age="
