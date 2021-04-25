@@ -107,7 +107,7 @@ public class UserService{
 		String editUserAddress;
 		String editUserTel;
 		
-		System.out.println("****시도 : " + findMemberById(setUserId).getRole() + " 의 권한을 가진 "  + setUserId + "가 " + userId + "의 Role 를 " + findMemberById(userId).getRole() + "에서 " + role + " 로 변경을 시도");
+		System.out.println("****시도 : " + findMemberById(setUserId).getRole() + " 의 권한을 가진 "  + setUserId + "(이)가 " + userId + "의 Role 를 " + findMemberById(userId).getRole() + "에서 " + role + " 로 변경을 시도");
 		
 		try {
 			if(isPermissions(setUserId) != Role.ADMIN) { // 유저의 권한은 체크
@@ -121,12 +121,12 @@ public class UserService{
 				throw new NotUser("없는 회원입니다.");
 			}
 			
-			editUserPw = findMemberById(userId).getUserPw();
-			editUserName = findMemberById(userId).getUserName();
-			editUserSex = findMemberById(userId).getSex();
-			editUserAge = findMemberById(userId).getAge();
-			editUserAddress = findMemberById(userId).getAddress();
-			editUserTel = findMemberById(userId).getTel();
+			editUserPw = findMemberById(userId).getUserPw(); // 기존의 유저 비밀번호 값 보유
+			editUserName = findMemberById(userId).getUserName(); // 기존의 유저 이름 값 보유
+			editUserSex = findMemberById(userId).getSex(); // 기존의 유저 성별 값 보유
+			editUserAge = findMemberById(userId).getAge(); // 기존의 유저 나이 값 보유
+			editUserAddress = findMemberById(userId).getAddress(); // 기존의 유저 주소 값 보유
+			editUserTel = findMemberById(userId).getTel(); // 기존의 유저 전화 번호 값 보유
 			
 			userList.remove(findMemberById(userId)); // 회원 정보 삭제
 			userList.add(new User(userId,editUserPw,editUserName,editUserSex,editUserAge,editUserAddress,editUserTel,role)); // 수정된 회원 정보 추가

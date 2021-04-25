@@ -1,5 +1,6 @@
 import Product.Product;
 import Product.ProductService;
+import Prohibit.Prohibited;
 import Role.Role;
 import User.User;
 import User.UserService;
@@ -96,6 +97,15 @@ public class MainTest {
 		pro.setUserPermissions("kim3922", "park1234", Role.USER);
 		pro.printAllMember();
 		pro.setUserPermissions("leeji0922", "park1234", Role.GUEST);
+		
+		
+		//금지어 체크 테스트
+		System.out.println("=========================금지어 체크 테스트============================");
+		pro.addProduct("leeji0922", new Product("애플충전기",10000,100));
+		pro.findProduct("애플충전기");
+		pro.addProduct("leeji0922", new Product("삼성케이스",40000,100));
+		pro.findProduct("삼성케이스");
+		
 	}
 
 }

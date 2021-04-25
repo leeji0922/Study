@@ -9,13 +9,15 @@ import Exception.NotAdmin;
 import Exception.NotParameter;
 import Exception.NotPermissions;
 import Exception.NotUser;
+import Prohibit.Prohibited;
 import Role.Role;
 import User.UserService;
 
-public class ProductService extends UserService{
+public class ProductService extends UserService implements Prohibited{
 	
 	List<Product> proList = new ArrayList<>();
 	List<ProductBuy> buyList = new ArrayList<>();
+	List<Prohibited> hibList = new ArrayList<>();
 	
 	//상품 등록
 	public void addProduct(String userId, Product product) {
@@ -26,6 +28,10 @@ public class ProductService extends UserService{
 			}
 			if(isPermissions(userId) != Role.ADMIN) {
 				throw new NotPermissions("권한이 없습니다.");
+			}
+			if(checkProductName(product.getProductName()) != null) {
+				System.out.println("금지어 : " + checkProductName(product.getProductName()) + " (이)가 있으므로 등록이 안됩니다.");
+				return;
 			}
 			proList.add(new Product(product.getProductName(),product.getCost(),product.getStock()));
 			System.out.println("등록완료");
@@ -124,6 +130,16 @@ public class ProductService extends UserService{
 		} catch(Exception e) {
 			e.getStackTrace();
 		}
+	}
+	
+	//상품 금지어 검증
+	public String checkProductName(String productName) {
+		for(int i = 0; i < Prohibited.proWord.length; i++) { // 인터페이스 Prohibited안의 proWord 값만큼 반복
+			if(productName.contains(Prohibited.proWord[i])) { // 상품명에 금지어가 포함 될 경우
+				return Prohibited.proWord[i]; // 해당 금지어를 반환
+			}
+		}
+		return null;
 	}
 	
 }
