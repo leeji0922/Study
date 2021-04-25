@@ -24,19 +24,21 @@ public class MainTest {
 		// 회원 가입 & 정보 수정 테스트
 		System.out.println("=========================회원 가입 & 정보 수정(재익님 수정) 테스트============================");
 		pro.printAllMember();
-		pro.registerMember(new User("leeji0922","1234","이재익","남성","25","목동","010", Role.ADMIN));
+		pro.registerMember(new User("leeji0922","12344444","이재익","남성","25","목동","010", Role.ADMIN));
 		System.out.println("회원 중복 테스트");
-		pro.registerMember(new User("leeji0922","2222","김유진","여성","23","강서","011", Role.USER));
+		pro.registerMember(new User("leeji0922","22224444","김유진","여성","23","강서","011", Role.USER));
 		pro.printAllMember();
 		System.out.println("변경 테스트");
-		pro.editMember(new User("leeji0922","1234","이재익","남성","25","목4동","010", Role.ADMIN));
+		pro.editMember(new User("leeji0922","12344444","이재익","남성","25","목4동","010", Role.ADMIN));
 		pro.printAllMember();
-		pro.editMember(new User("leeji0922","1234","이재익","남성","25","목4동","010", Role.USER));
+		pro.editMember(new User("leeji0922","12344444","이재익","남성","25","목4동","010", Role.USER));
+		pro.printAllMember();
+		pro.registerMember(new User("kim3922","2222","김유진","여성","23","강서","011", Role.USER));
 		pro.printAllMember();
 		
 		// 탈퇴 테스트
 		System.out.println("=========================회원 탈퇴 테스트============================");
-		pro.registerMember(new User("kim3922","2222","김유진","여성","23","강서","011", Role.USER));
+		pro.registerMember(new User("kim3922","22224444","김유진","여성","23","강서","011", Role.USER));
 		pro.printAllMember();
 		pro.delectMember("leeji0922");
 		pro.printAllMember();
@@ -45,7 +47,7 @@ public class MainTest {
 		//상품 등록 테스트
 		System.out.println("=========================상품 등록 테스트============================");
 		pro.addProduct("leeji0922", new Product("과자",100,100));
-		pro.registerMember(new User("leeji0922","1234","이재익","남성","25","목동","010", Role.ADMIN));
+		pro.registerMember(new User("leeji0922","12344444","이재익","남성","25","목동","010", Role.ADMIN));
 		pro.addProduct("leeji0922", new Product("과자",100,100));
 		pro.findProduct("과자");
 		pro.addProduct("leeji3922", new Product("과자2",200,500));
@@ -55,7 +57,7 @@ public class MainTest {
 		
 		//상품 구매 테스트
 		System.out.println("=========================상품 구매 테스트============================");
-		pro.registerMember(new User("park1234","1234","박누구","중성","45","평양","001", Role.GUEST));
+		pro.registerMember(new User("park1234","12344444","박누구","중성","45","평양","001", Role.GUEST));
 		pro.buyProduct("leeji0922", "과자", 3);
 		pro.buyProduct("leeji3922", "과자", 4);
 		pro.buyProduct("park1234", "과자", 5);
@@ -112,7 +114,7 @@ public class MainTest {
 		
 		
 		//금지어 추가 테스트
-		System.out.println("=========================금지어 추가 테스트============================");
+//		System.out.println("=========================금지어 추가 테스트============================");
 //		pro.addProhibit(pro);
 	}
 

@@ -19,8 +19,12 @@ public class UserService{
 			if(findMemberById(user.getUserId())!=null) {
 				throw new IsDupliUser("회원중복");
 			}
+			if(user.getUserPw().length() < 8) {
+				System.out.println("비밀번호가 8자 이하 입니다. 8자 이상이 되게 수정 해주세요.");
+				return;
+			}
 			userList.add(user);
-			System.out.println("회원가입 완료");
+			System.out.println(user.getUserId() +" 회원가입 완료");
 			
 			//System.out.println(user);
 		
@@ -38,14 +42,6 @@ public class UserService{
 		}
 		return null;
 	}
-//	public User findMemberByName(String userName) {
-//		for(User u: userList) {
-//			if(u.getUserName().equals(userName)) {
-//				return u;
-//			}
-//		}
-//		return null;
-//	}
 	
 	// 회원정보수정
 	public void editMember(User user) {
@@ -63,7 +59,7 @@ public class UserService{
 			}
 			userList.remove(findMemberById(user.getUserId())); // 입력한 유저입력값을 삭제
 			userList.add(user); // 해당 정보를 새로 등록
-			System.out.println("수정 완료");
+			System.out.println(user.getUserId() + "의 회원 정보 수정 완료");
 				
 			//System.out.println(userList);
 		
@@ -89,7 +85,7 @@ public class UserService{
 			return;
 		}
 		userList.remove(findMemberById(userId));// 입력한 유저입력값을 삭제
-		System.out.println("삭제 완료");
+		System.out.println(userId + "의 회원 정보를 삭제 완료");
 	}
 
 	
@@ -115,6 +111,9 @@ public class UserService{
 		System.out.println("****시도 : " + findMemberById(setUserId).getRole() + " 의 권한을 가진 "  + setUserId + "(이)가 " + userId + "의 Role 를 " + findMemberById(userId).getRole() + "에서 " + role + " 로 변경을 시도");
 		
 		try {
+			if(findMemberById(userId) == null) { // 회원 정보 값 null 체크
+				throw new NotUser("없는 회원입니다.");
+			}
 			if(isPermissions(setUserId) != Role.ADMIN) { // 유저의 권한은 체크
 				throw new NotPermissions("권한이 없습니다.");
 			}
@@ -122,10 +121,6 @@ public class UserService{
 				System.out.println("이미 " + role +" 입니다.");
 				return;
 			}
-			if(findMemberById(userId) == null) { // 회원 정보 값 null 체크
-				throw new NotUser("없는 회원입니다.");
-			}
-			
 			editUserPw = findMemberById(userId).getUserPw(); // 기존의 유저 비밀번호 값 보유
 			editUserName = findMemberById(userId).getUserName(); // 기존의 유저 이름 값 보유
 			editUserSex = findMemberById(userId).getSex(); // 기존의 유저 성별 값 보유
@@ -135,7 +130,7 @@ public class UserService{
 			
 			userList.remove(findMemberById(userId)); // 회원 정보 삭제
 			userList.add(new User(userId,editUserPw,editUserName,editUserSex,editUserAge,editUserAddress,editUserTel,role)); // 수정된 회원 정보 추가
-			System.out.println("권한이 설정 되었습니다.");
+			System.out.println(userId + " 의 권한이 " + role + "로 설정 되었습니다.");
 			
 		} catch(Exception e) {
 			e.getStackTrace();

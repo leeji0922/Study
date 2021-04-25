@@ -35,7 +35,7 @@ public class ProductService extends UserService implements Prohibited{
 			}
 			System.out.println("***시도 : " + userId + " (이)가 " + product.getProductName() + "을 " + "상품 등록을 시도");
 			proList.add(new Product(product.getProductName(),product.getCost(),product.getStock()));
-			System.out.println("등록완료");
+			System.out.println(userId + " (이)가 " + product.getProductName() + " 을 등록완료");
 		} catch (Exception e) {
 			e.getStackTrace();
 		}
@@ -79,7 +79,7 @@ public class ProductService extends UserService implements Prohibited{
 			productBuy.setUserId(userId); // 고객아이디을 설정
 			findProduct.setStock(findProduct.getStock() - quantity); // 상품 재고를 마이너스 함
 			buyList.add(productBuy); // productBuy의 list에 값을 입력
-			System.out.println("구매완료");
+			System.out.println( userId + " (이)가 " + productName + "(을)를 구매완료");
 		} catch (Exception e) {
 			e.getStackTrace();
 		}
@@ -88,9 +88,9 @@ public class ProductService extends UserService implements Prohibited{
 	//구매리스트조회
 	public void printAllBuyList(String userId) {
 		
-		for(int i = 0; i < buyList.size(); i++) {
-			if(buyList.get(i).getUserId().equals(userId)) {
-				System.out.println(buyList.get(i));
+		for(int i = 0; i < buyList.size(); i++) { //buyList의 길이를 체크
+			if(buyList.get(i).getUserId().equals(userId)) { // buyList안의 유저의 값이 입력한 유저의 값과 같다면
+				System.out.println(buyList.get(i)); // 출력
 				return;
 			}
 		}
@@ -107,7 +107,7 @@ public class ProductService extends UserService implements Prohibited{
 				throw new NotParameter("해당 상품이 없습니다.");
 			}
 			proList.remove(findProduct(productName)); // 상품 이름을 가진 상품 데이터 삭제
-			System.out.println("삭제가 완료 되었습니다.");
+			System.out.println(userId + " (이)가 " + productName + "(을)를 삭제 완료 했습니다.");
 			
 		} catch(Exception e) {
 				e.getStackTrace();
@@ -126,7 +126,7 @@ public class ProductService extends UserService implements Prohibited{
 			}
 			proList.remove(findProduct(product.getProductName()));// 상품 이름을 가진 상품 데이터 삭제
 			proList.add(new Product(product.getProductName(),product.getCost(),product.getStock())); // 상품 추가
-			System.out.println("수정이 완료 되었습니다.");
+			System.out.println(userId + " (이)가 " + product.getProductName() + "(을)를 수정 완료 했습니다.");
 			
 		} catch(Exception e) {
 			e.getStackTrace();
@@ -144,14 +144,14 @@ public class ProductService extends UserService implements Prohibited{
 	}
 	
 	//금지어 추가 ( 개발 중 )
-	public void addProhibit(String name) {
-		for(int i = 0; i < Prohibited.proWord.length; i++) {
-			if(name.equals(proWord[i])) {
-				System.out.println("금지어 " + name +" 는 이미 존재 합니다.");
+//	public void addProhibit(String name) {
+//		for(int i = 0; i < Prohibited.proWord.length; i++) {
+//			if(name.equals(proWord[i])) {
+//				System.out.println("금지어 " + name +" 는 이미 존재 합니다.");
 //				hibList.add(i + 1, name);
-			}
-		}
-		
-	}
+//			}
+//		}
+//		
+//	}
 	
 }
