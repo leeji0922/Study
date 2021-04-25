@@ -49,6 +49,7 @@ public class UserService{
 	
 	// 회원정보수정
 	public void editMember(User user) {
+		
 		try {
 			if(findMemberById(user.getUserId()) == null) { // 입력한 유저입력값을 찾아서 목록에 없을 경우
 				throw new NotUser("없는 회원입니다.");
@@ -56,6 +57,10 @@ public class UserService{
 //			if(!findMemberById(userId).equals(userId)) {
 //				throw new NotUser("아이디를 바꿀 순 없습니다.");	
 //			}
+			if(findMemberById(user.getUserId()).getRole() != user.getRole()) { // 기존 유저의 권한이 입력한 권한 값과 다를 경우
+				System.out.println("유저의 권한을 변경 할 수 없습니다.");
+				return;
+			}
 			userList.remove(findMemberById(user.getUserId())); // 입력한 유저입력값을 삭제
 			userList.add(user); // 해당 정보를 새로 등록
 			System.out.println("수정 완료");
@@ -100,12 +105,12 @@ public class UserService{
 	//유저의 권한 세팅
 	public void setUserPermissions(String setUserId, String userId, Role role) {
 		
-		String editUserPw;
-		String editUserName;
-		String editUserSex;
-		String editUserAge;
-		String editUserAddress;
-		String editUserTel;
+		String editUserPw; // 기존 유저 비밀번호
+		String editUserName; // 기존 유저 이름
+		String editUserSex; // 기존 유저 성별
+		String editUserAge; // 기존 유저 나이
+		String editUserAddress; // 기존 유저 주소
+		String editUserTel; // 기존 유저 전화 번호
 		
 		System.out.println("****시도 : " + findMemberById(setUserId).getRole() + " 의 권한을 가진 "  + setUserId + "(이)가 " + userId + "의 Role 를 " + findMemberById(userId).getRole() + "에서 " + role + " 로 변경을 시도");
 		

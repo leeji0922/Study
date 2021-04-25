@@ -143,4 +143,15 @@ public class ProductService extends UserService implements Prohibited{
 		return null;
 	}
 	
+	//금지어 추가 ( 개발 중 )
+	public void addProhibit(String name) {
+		for(int i = 0; i < Prohibited.proWord.length; i++) {
+			if(name.equals(proWord[i])) {
+				System.out.println("금지어 " + name +" 는 이미 존재 합니다.");
+//				hibList.add(i + 1, name);
+			}
+		}
+		
+	}
+	
 }

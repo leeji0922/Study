@@ -31,6 +31,8 @@ public class MainTest {
 		System.out.println("변경 테스트");
 		pro.editMember(new User("leeji0922","1234","이재익","남성","25","목4동","010", Role.ADMIN));
 		pro.printAllMember();
+		pro.editMember(new User("leeji0922","1234","이재익","남성","25","목4동","010", Role.USER));
+		pro.printAllMember();
 		
 		// 탈퇴 테스트
 		System.out.println("=========================회원 탈퇴 테스트============================");
@@ -107,6 +109,11 @@ public class MainTest {
 		pro.findProduct("삼성케이스");
 		pro.addProduct("leeji0922", new Product("샤오미케이스",40000,100));
 		pro.findProduct("샤오미케이스");
+		
+		
+		//금지어 추가 테스트
+		System.out.println("=========================금지어 추가 테스트============================");
+//		pro.addProhibit(pro);
 	}
 
 }
