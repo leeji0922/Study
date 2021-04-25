@@ -71,7 +71,9 @@ public class User {
 		this.tel = tel;
 		this.role = role;
 	}
-	public User(String userId, String userPw,String userName, String sex, String age, String address, String tel, Role role) {
+	
+	public User(String userId, String userPw, String userName, String sex, String age, String address, String tel,
+			Role role) {
 		super();
 		this.userId = userId;
 		this.userPw = userPw;
@@ -81,6 +83,16 @@ public class User {
 		this.address = address;
 		this.tel = tel;
 		this.role = role;
+	}
+	public User(String userId, String userPw,String userName, String sex, String age, String address, String tel) {
+		super();
+		this.userId = userId;
+		this.userPw = userPw;
+		this.userName = userName;
+		this.sex = sex;
+		this.age = age;
+		this.address = address;
+		this.tel = tel;
 	}
 	public User(User userInfo, String setRole) {
 		super();

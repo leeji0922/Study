@@ -63,12 +63,14 @@ public class MainTest {
 		pro.buyProduct("leeji0922", "과자2", 100);
 		pro.buyProduct("leeji3922", "과자2", 1);
 		pro.findProduct("과자2");
+		pro.printAllMember();
 		
 		//상품 구매 목록 조회 테스트
 		System.out.println("=========================상품 구매 목록 조회 테스트============================");
 		pro.printAllBuyList("leeji0922");
 		pro.printAllBuyList("leeji3922");
 		pro.printAllBuyList("park1234");
+		pro.printAllMember();
 		
 		//상품 수정 테스트
 		System.out.println("=========================상품 수정 테스트============================");
@@ -76,6 +78,7 @@ public class MainTest {
 		pro.findProduct("과자2");
 		pro.editProdcut("leeji0922", new Product("과자2",50000,5));
 		pro.findProduct("과자2");
+		pro.printAllMember();
 		
 		//상품 삭제 테스트
 		System.out.println("=========================상품 삭제 테스트============================");
@@ -83,12 +86,16 @@ public class MainTest {
 		pro.findProduct("과자2");
 		pro.deletProduct("leeji0922", "과자2");
 		pro.findProduct("과자2");
+		pro.printAllMember();
 		
 		
 		//권한 수정 테스트
 		System.out.println("=========================권한 수정 테스트============================");
 		pro.setUserPermissions("leeji0922", "kim3922", Role.GUEST);
 		pro.printAllMember();
+		pro.setUserPermissions("kim3922", "park1234", Role.USER);
+		pro.printAllMember();
+		pro.setUserPermissions("leeji0922", "park1234", Role.GUEST);
 	}
 
 }
